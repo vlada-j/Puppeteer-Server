@@ -5,7 +5,7 @@ import puppeteer, { PDFOptions } from "puppeteer";
 export class PuppeteerService {
 
 	private pdfSettings: PDFOptions = {
-		format: 'a4',
+		format: "a4",
 		margin: {
 			bottom: 0,
 			left: 0,

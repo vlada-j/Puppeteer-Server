@@ -1,5 +1,6 @@
 import { Controller, Get, Request, Response } from "@nestjs/common";
 import { PuppeteerService } from "./puppeteer.service";
+import { getUrlFromQuery } from "./utils";
 
 
 @Controller()
@@ -8,7 +9,7 @@ export class AppController {
 	constructor(private readonly puppeteer: PuppeteerService) {}
 
 
-	@Get('screenshot')
+	@Get("screenshot")
 	async getScreenshot(@Request() request, @Response() response) {
 		const url = getUrlFromQuery(request.query);
 
@@ -19,7 +20,7 @@ export class AppController {
 	}
 
 
-	@Get('pdf')
+	@Get("pdf")
 	async getPdf(@Request() request, @Response() response) {
 		const url = getUrlFromQuery(request.query);
 
@@ -29,17 +30,4 @@ export class AppController {
 		response.end(content, "utf-8");
 	}
 
-}
-
-
-
-
-function getUrlFromQuery(query) {
-	const url = query.url;
-
-	if (typeof url !== "string" || url.trim() == "") {
-		throw new Error("URL is not provided");
-	}
-
-	return decodeURIComponent( url )
 }
